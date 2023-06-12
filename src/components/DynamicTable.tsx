@@ -1,15 +1,11 @@
+import { DynamicTableProps } from "../types/dynamicTableTypes";
 
-interface DynamicTableProps {
-  data: { [key: string]: string | number }[];
-  columns: string[];
-  onRowClick: (id: number) => void;
-  selectedRow: number | null;
-}
-
-function DynamicTable({ data, columns, onRowClick, selectedRow }: DynamicTableProps) {
+function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
   if (data.length === 0) {
     return <p className="ml-2">No books available.</p>;
   }
+
+  const columns = ["Title", "Author", "Published Date", "Page Count"];
 
   return (
     <div className="overflow-x-auto">
@@ -27,29 +23,24 @@ function DynamicTable({ data, columns, onRowClick, selectedRow }: DynamicTablePr
           </tr>
         </thead>
         <tbody>
-          {data.map((row) => (
+          {data.map((book) => (
             <tr
-              key={row.id}
-              className={`${selectedRow === row.id ? 'bg-indigo-100' : ''}`}
-              onClick={() => onRowClick(row.id as number)}
+              key={book.id}
+              className={`${selectedRow === book.id ? "bg-indigo-100" : ""}`}
+              onClick={() => onRowClick(book.id)}
             >
-              {columns.map((column, index) => (
-                <td
-                  key={`${row.id}-${column}`}
-                  className={`px-6 py-4 whitespace-nowrap${index === columns.length - 1 ? ' text-right' : ''}`}
-                >
-                  {index === columns.length - 1 ? (
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded"
-                      onClick={() => onRowClick(row.id as number)}
-                    >
-                      Learn More
-                    </button>
-                  ) : (
-                    row[column.toLowerCase()]
-                  )}
-                </td>
-              ))}
+              <td className="px-6 py-4 whitespace-nowrap">
+                {book.volumeInfo.title}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {book.volumeInfo.authors.join(", ")}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {book.volumeInfo.publishedDate}
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                {book.volumeInfo.pageCount}
+              </td>
             </tr>
           ))}
         </tbody>
