@@ -11,19 +11,6 @@ function DisplayToggle({ onDisplayChange }: DisplayToggleProps) {
       <p className="text-gray-600 text-center mb-8">
         Explore a world of knowledge and inspiration through our vast collection of programming books and renowned authors.
       </p>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-medium mb-4">Authors</h2>
-          <p className="text-gray-600 mb-6">
-            Discover talented authors who have contributed their expertise to the programming world. Explore their biographies, achievements, and insights.
-          </p>
-          <button
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-            onClick={() => handleOptionChange(DisplayOption.Authors)}
-          >
-            Select
-          </button>
-        </div>
         <div className="bg-white p-6 rounded-lg shadow">
           <h2 className="text-xl font-medium mb-4">Books</h2>
           <p className="text-gray-600 mb-6">
@@ -36,7 +23,6 @@ function DisplayToggle({ onDisplayChange }: DisplayToggleProps) {
             Select
           </button>
         </div>
-      </div>
     </div>
   );
 }

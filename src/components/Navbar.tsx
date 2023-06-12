@@ -4,8 +4,8 @@ import { BreadcrumbItem } from '../store/types/breadcrumbTypes';
 import { useNavigate } from 'react-router';
 import { AiOutlineHome } from 'react-icons/ai';
 
-export default function Navbar(){
-  const breadcrumbs = useSelector<RootState, BreadcrumbItem[]>((state) => state.breadcrumb.breadcrumbs);
+export default function Navbar() {
+    const breadcrumbs = useSelector<RootState, BreadcrumbItem[]>((state) => state.breadcrumb.breadcrumbs);
     const navigate = useNavigate();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, url: string) => {

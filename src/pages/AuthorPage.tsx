@@ -1,11 +1,11 @@
 import { useParams } from "react-router"
 import useBreadcrumbUpdate from "../hooks/useBreadcrumbUpdate"
-import BookCard from "../components/BookCard"
+import AuthorCard from "../components/AuthorCard"
 
 
-export default function BookPage() {
+export default function AuthorPage() {
     const {name} = useParams()
     useBreadcrumbUpdate()
     if(!name) return null
-    return <BookCard name={name} />
+    return <AuthorCard name={name} />
 }
