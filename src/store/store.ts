@@ -1,18 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { combineReducers } from 'redux';
-import userPlaceReducer from './reducers/userPlaceReducer';
+import { configureStore , combineReducers} from '@reduxjs/toolkit';
+import breadcrumbReducer from './reducers/breadcrumbReducer';
+import { BreadcrumbState } from './types/breadcrumbTypes';
 
-// Reducers
+export interface RootState {
+    breadcrumb: BreadcrumbState;
+}
 
-const rootReducer = combineReducers({
-    userPlace: userPlaceReducer
+const rootReducer = combineReducers<RootState>({
+    breadcrumb: breadcrumbReducer,
 })
-
-// Store
 
 const store = configureStore({
-    reducer: rootReducer
+    reducer: rootReducer,
 })
-
 
 export default store;
