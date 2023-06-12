@@ -4,7 +4,7 @@ import { RootState } from '../store/store';
 import { BreadcrumbItem } from '../store/types/breadcrumbTypes';
 import { useNavigate } from 'react-router';
 
-const Breadcrumb = () => {
+export default function Breadcrumb(){
   const breadcrumbs = useSelector<RootState, BreadcrumbItem[]>((state) => state.breadcrumb.breadcrumbs);
   const navigate = useNavigate();
 
@@ -72,6 +72,5 @@ const Breadcrumb = () => {
       </ol>
     </nav>
   );
-};
+}
 
-export default Breadcrumb;
