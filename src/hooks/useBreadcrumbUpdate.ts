@@ -12,7 +12,7 @@ export default function useBreadcrumbUpdate() {
     const breadcrumbs = pathnames.map((name, index) => {
       const capitalizedLabel = name.charAt(0).toUpperCase() + name.slice(1);
       const url = `/${pathnames.slice(0, index + 1).join('/')}`;
-      return { label: capitalizedLabel, url };
+      return { label: capitalizedLabel, url};
     });
     dispatch(setBreadcrumbs(breadcrumbs));
   }, [location, dispatch]);

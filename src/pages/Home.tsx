@@ -1,13 +1,21 @@
-import useBreadcrumbUpdate from "../hooks/useBreadcrumbUpdate"
-
-
-
+import { useNavigate } from 'react-router';
+import DisplayToggle from '../components/DisplayToggle';
+import useBreadcrumbUpdate from '../hooks/useBreadcrumbUpdate';
+import { DisplayOption } from '../types/displayToggleTypes';
 
 export default function Home() {
-    useBreadcrumbUpdate()
-    return (
-        <div>
-            <h1>Home</h1>
-        </div>
-    )
+  // Update the breadcrumb
+  useBreadcrumbUpdate();
+
+  const navigate = useNavigate();
+
+  const handleDisplayChange = (option: DisplayOption) => {
+    if (option === DisplayOption.Authors) {
+      navigate('/authors');
+    } else if (option === DisplayOption.Books) {
+      navigate('/books');
+    }
+  };
+
+  return <DisplayToggle onDisplayChange={handleDisplayChange} />;
 }
