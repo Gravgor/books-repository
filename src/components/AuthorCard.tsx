@@ -39,49 +39,47 @@ export default function AuthorCard({ name }: AuthorCardProps) {
 
   return (
     <>
-      <div className="flex flex-col gap-4 items-center">
-        <h1 className="text-2xl font-bold mb-4 ml-2">Books that {name} has written</h1>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead>
-                <tr>
-                  {columns.map((column) => (
-                    <th
-                      key={column}
-                      className="px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
-                    >
-                      {column}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {author?.books.map((book, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{book.title}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">{book.publishedDate}</td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      {book.pageCount ? book.pageCount : "N/A"}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={() => handleBookClick(book.title)}
-                      >
-                        Learn More
-                      </button>
-                    </td>
-                  </tr>
+      <h1 className="text-2xl font-bold mb-4 ml-2">Books that {name} has written</h1>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                {columns.map((column) => (
+                  <th
+                    key={column}
+                    className="px-6 py-3 bg-gray-200 text-left text-xs font-medium text-gray-700 uppercase tracking-wider"
+                  >
+                    {column}
+                  </th>
                 ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+              </tr>
+            </thead>
+            <tbody>
+              {author?.books.map((book, index) => (
+                <tr key={index}>
+                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{book.title}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{book.publishedDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    {book.pageCount ? book.pageCount : "N/A"}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => handleBookClick(book.title)}
+                    >
+                      Learn More
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </>
   );
 }
