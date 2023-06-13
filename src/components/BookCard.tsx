@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Book } from "../types/bookCardTypes";
 
 interface BookCardProps {
-  name: string;
+  id: string;
 }
 
-export default function BookCard({ name }: BookCardProps) {
+export default function BookCard({ id }: BookCardProps) {
   const [book, setBook] = useState<Book | null>(null);
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -17,11 +17,11 @@ export default function BookCard({ name }: BookCardProps) {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(name)}`
+          `https://www.googleapis.com/books/v1/volumes/${id}`
         );
         const data = await response.json();
-        if (data.items && data.items.length > 0) {
-          const bookData = data.items[0];
+        if (data) {
+          const bookData = data;
           const bookInfo: Book = {
             id: bookData.id,
             volumeInfo: {
@@ -31,6 +31,7 @@ export default function BookCard({ name }: BookCardProps) {
               authors: bookData.volumeInfo.authors || [],
               publishedDate: bookData.volumeInfo.publishedDate || "N/A",
               pageCount: bookData.volumeInfo.pageCount || 0,
+              language: bookData.volumeInfo.language,
               imageLinks: bookData.volumeInfo.imageLinks,
               previewLink: bookData.volumeInfo.previewLink,
             },
@@ -48,7 +49,7 @@ export default function BookCard({ name }: BookCardProps) {
     };
 
     fetchData();
-  }, [name]);
+  }, [id]);
 
   const handleAuthorClick = (authorName: string) => {
     navigate(`/authors/${encodeURIComponent(authorName)}`);
@@ -96,6 +97,7 @@ export default function BookCard({ name }: BookCardProps) {
               </span>
             ))}
           </p>
+          <p className="text-gray-600">Language: {book.volumeInfo.language.toUpperCase()}</p>
         </div>
       </div>
       <p className="text-gray-600">Description: {description || "N/A"}</p>

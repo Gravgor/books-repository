@@ -1,9 +1,12 @@
 import { DynamicTableProps } from "../types/dynamicTableTypes";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setBreadcrumbs } from "../store/actions/breadcrumbAction";
 
 export default function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [highlightedRow, setHighlightedRow] = useState<string | null>(null);
 
   useEffect(() => {
@@ -14,8 +17,9 @@ export default function DynamicTable({ data, onRowClick, selectedRow }: DynamicT
     return <p className="ml-2">No books available.</p>;
   }
 
-  const handleBookClick = (bookName: string) => {
-    navigate(`/books/${bookName}`);
+  const handleBookClick = (bookName: string, id: string) => {
+    dispatch(setBreadcrumbs([{ label: "Books", url: "/books" }, { label: bookName, url: `/books/${id}` }]));
+    navigate(`/books/${id}`);
   };
 
   const handleRowClick = (rowId: string) => {
@@ -86,7 +90,7 @@ export default function DynamicTable({ data, onRowClick, selectedRow }: DynamicT
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 sm:px-4 rounded text-xs sm:text-sm"
-                  onClick={() => handleBookClick(book.volumeInfo.title)}
+                  onClick={() => handleBookClick(book.volumeInfo.title, book.id)}
                 >
                   Learn More
                 </button>

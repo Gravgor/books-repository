@@ -24,7 +24,9 @@ export default function Navbar() {
             </div>
             <ol className="flex items-center">
                 <li className="flex items-center">
-                    <AiOutlineHome className="w-4 h-4 mx-2 text-gray-500 hover:text-gray-700" />
+                    <AiOutlineHome className="w-4 h-4 mx-2 text-gray-500 hover:text-gray-700" onClick={() => {
+                        navigate('/');
+                    }}/>
                     <a href={homeBreadcrumb.url} className="text-gray-500 hover:text-gray-700" onClick={(e) => {
                         handleClick(e, homeBreadcrumb.url);
                     }}>

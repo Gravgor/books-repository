@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setBreadcrumbs } from "../store/actions/breadcrumbAction";
 import { Author, AuthorCardProps, Book } from "../types/authorCardTypes";
 
 export default function AuthorCard({ name }: AuthorCardProps) {
   const [author, setAuthor] = useState<Author | null>(null);
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,7 +20,7 @@ export default function AuthorCard({ name }: AuthorCardProps) {
         );
         const data = await response.json();
         if (data.items) {
-          const books = data.items.map((item: { volumeInfo: Book }) => item.volumeInfo);
+          const books = data.items;
           setAuthor({ name, books });
         }
       } catch (error) {
@@ -30,8 +33,9 @@ export default function AuthorCard({ name }: AuthorCardProps) {
     fetchData();
   }, [name]);
 
-  const handleBookClick = (bookId: string) => {
-    navigate(`/books/${bookId}`);
+  const handleBookClick = (bookName: string, id: string) => {
+    dispatch(setBreadcrumbs([{ label: "Books", url: "/books" }, { label: bookName, url: `/books/${id}` }]));
+    navigate(`/books/${id}`);
   };
 
   const columns = ["ID", "Title", "Published Date", "Page Count", "Action"];
@@ -60,13 +64,13 @@ export default function AuthorCard({ name }: AuthorCardProps) {
               {author?.books.map((book, index) => (
                 <tr className="hover:bg-indigo-100 transition-all" key={index}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.title}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.publishedDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.pageCount || "N/A"}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.title}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.publishedDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.pageCount || "N/A"}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 sm:px-4 rounded text-xs sm:text-sm"
-                      onClick={() => handleBookClick(book.title)}
+                      onClick={() => handleBookClick(book.volumeInfo.title, book.id)}
                     >
                       Learn More
                     </button>

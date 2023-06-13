@@ -7,6 +7,7 @@ export interface Book {
       authors: string[];
       publishedDate: string;
       pageCount: number;
+      language: string;
       imageLinks?: {
         thumbnail: string;
       };
