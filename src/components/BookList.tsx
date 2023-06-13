@@ -24,8 +24,9 @@ export default function BookList() {
                 volumeInfo: {
                   title: item.volumeInfo.title || "",
                   authors: item.volumeInfo.authors || [],
+                  categories: item.volumeInfo.categories || "N/A",
                   publishedDate: item.volumeInfo.publishedDate || "",
-                  pageCount: item.volumeInfo.pageCount || 0
+                  pageCount: item.volumeInfo.pageCount || "N/A",
                 }
               };
               return book;
@@ -43,7 +44,7 @@ export default function BookList() {
     fetchBooks();
   }, []);
 
-  const handleBookClick = (id: string) => {
+  const handleBookClick = (id: string | null) => {
     setSelectedBook(id);
   };
 

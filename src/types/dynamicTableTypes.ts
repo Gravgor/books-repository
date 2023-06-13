@@ -17,7 +17,7 @@ export interface Book {
         text: boolean;
         image: boolean;
       };
-      pageCount?: number;
+      pageCount?: number | string;
       printType?: string;
       categories?: string[];
       maturityRating?: string;
@@ -62,6 +62,6 @@ export interface Book {
   
   export interface DynamicTableProps {
     data: Book[];
-    onRowClick: (id: string) => void;
+    onRowClick: (id: string | null) => void;
     selectedRow: string | null;
   }

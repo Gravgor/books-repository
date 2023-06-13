@@ -6,7 +6,8 @@ export interface IBookListProps {
   volumeInfo: {
     title: string;
     authors: string[];
+    categories: string[];
     publishedDate?: string;
-    pageCount?: number;
+    pageCount?: number | string;
   };
 }
