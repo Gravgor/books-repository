@@ -57,7 +57,7 @@ export default function AuthorList() {
         </thead>
         <tbody>
           {authors.map((author, index) => (
-            <tr key={index}>
+            <tr className="hover:bg-indigo-100 transition-all" key={index}>
               <td className="px-6 py-4 whitespace-nowrap">{author}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button

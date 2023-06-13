@@ -59,7 +59,7 @@ export default function AuthorCard({ name }: AuthorCardProps) {
             </thead>
             <tbody>
               {author?.books.map((book, index) => (
-                <tr key={index}>
+                <tr className="hover:bg-indigo-100 transition-all" key={index}>
                   <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{book.title}</td>
                   <td className="px-6 py-4 whitespace-nowrap">{book.publishedDate}</td>
