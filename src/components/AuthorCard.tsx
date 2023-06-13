@@ -3,7 +3,6 @@ import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { Author, AuthorCardProps, Book } from "../types/authorCardTypes";
 
-
 export default function AuthorCard({ name }: AuthorCardProps) {
   const [author, setAuthor] = useState<Author | null>(null);
   const [isLoading, setLoading] = useState(false);
@@ -60,15 +59,13 @@ export default function AuthorCard({ name }: AuthorCardProps) {
             <tbody>
               {author?.books.map((book, index) => (
                 <tr className="hover:bg-indigo-100 transition-all" key={index}>
-                  <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{book.title}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{book.publishedDate}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {book.pageCount ? book.pageCount : "N/A"}
-                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{index + 1}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.title}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.publishedDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.pageCount || "N/A"}</td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <button
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 sm:px-4 rounded text-xs sm:text-sm"
                       onClick={() => handleBookClick(book.title)}
                     >
                       Learn More

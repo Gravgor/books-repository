@@ -18,7 +18,7 @@ export default function Navbar() {
         url: '/',
     };
     return (
-        <nav className="flex flex-col gap-2 shadow-lg h-auto w-full my-2 p-2 text-black">
+        <nav className="flex flex-col gap-2 shadow-lg h-auto w-full my-2 p-2 text-black sticky top-0 bg-white z-10">
             <div className="flex items-center">
                 <h1 className="text-2xl font-bold ml-2">Bookify</h1>
             </div>

@@ -11,36 +11,37 @@ export default function BookList() {
   useEffect(() => {
     const fetchBooks = async () => {
       setIsLoading(true);
-      fetch("https://www.googleapis.com/books/v1/volumes?q=javascript")
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.items) {
-            const formattedBooks = data.items.map((item: IBookListProps) => {
-              const book: IBookListProps = {
-                id: item.id,
-                kind: item.kind,
-                etag: item.etag,
-                selfLink: item.selfLink,
-                volumeInfo: {
-                  title: item.volumeInfo.title || "",
-                  authors: item.volumeInfo.authors || [],
-                  categories: item.volumeInfo.categories || "N/A",
-                  publishedDate: item.volumeInfo.publishedDate || "",
-                  pageCount: item.volumeInfo.pageCount || "N/A",
-                }
-              };
-              return book;
-            });
-            setBooks(formattedBooks);
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching books:", error);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+      try {
+        const response = await fetch(
+          "https://www.googleapis.com/books/v1/volumes?q=javascript"
+        );
+        const data = await response.json();
+        if (data.items) {
+          const formattedBooks = data.items.map((item: IBookListProps) => {
+            const book: IBookListProps = {
+              id: item.id,
+              kind: item.kind,
+              etag: item.etag,
+              selfLink: item.selfLink,
+              volumeInfo: {
+                title: item.volumeInfo.title || "",
+                authors: item.volumeInfo.authors || [],
+                categories: item.volumeInfo.categories || "N/A",
+                publishedDate: item.volumeInfo.publishedDate || "",
+                pageCount: item.volumeInfo.pageCount || "N/A",
+              },
+            };
+            return book;
+          });
+          setBooks(formattedBooks);
+        }
+      } catch (error) {
+        console.error("Error fetching books:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
+
     fetchBooks();
   }, []);
 

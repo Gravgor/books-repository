@@ -2,7 +2,7 @@ import { DynamicTableProps } from "../types/dynamicTableTypes";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 
-function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
+export default function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
   const navigate = useNavigate();
   const [highlightedRow, setHighlightedRow] = useState<string | null>(null);
 
@@ -20,9 +20,9 @@ function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
 
   const handleRowClick = (rowId: string) => {
     if (rowId === selectedRow) {
-        onRowClick(null);
+      onRowClick(null);
     } else {
-        onRowClick(rowId);
+      onRowClick(rowId);
     }
   };
 
@@ -56,19 +56,21 @@ function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
           {data.map((book) => (
             <tr
               key={book.id}
-              className={`${highlightedRow === book.id ? "bg-indigo-100 hover:bg-indigo-100 transition-all" : "hover:bg-indigo-100 transition-all"}`}
+              className={`${
+                highlightedRow === book.id ? "bg-indigo-100 hover:bg-indigo-100 transition-all" : "hover:bg-indigo-100 transition-all"
+              }`}
               onClick={() => handleRowClick(book.id)}
             >
-              <td className="px-6 py-4 whitespace-nowrap">{book.id}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{book.volumeInfo.title}</td>
-              <td className="px-6 py-4 whitespace-nowrap">
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.id}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.title}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">
                 {book.volumeInfo.authors.map((author, index) => (
                   <span key={index}>
                     {index > 0 && ", "}
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-700"
+                      className="text-blue-500 hover:text-blue-700 text-xs sm:text-sm"
                       onClick={(e) => {
                         handleAuthorClick(e);
                       }}
@@ -78,12 +80,12 @@ function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
                   </span>
                 ))}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap">{book.volumeInfo.publishedDate}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{book.volumeInfo.pageCount}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{book.volumeInfo.categories}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.publishedDate}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.pageCount}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{book.volumeInfo.categories}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 sm:px-4 rounded text-xs sm:text-sm"
                   onClick={() => handleBookClick(book.volumeInfo.title)}
                 >
                   Learn More
@@ -96,5 +98,3 @@ function DynamicTable({ data, onRowClick, selectedRow }: DynamicTableProps) {
     </div>
   );
 }
-
-export default DynamicTable;

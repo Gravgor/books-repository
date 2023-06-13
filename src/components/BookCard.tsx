@@ -3,8 +3,11 @@ import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../types/bookCardTypes";
 
+interface BookCardProps {
+  name: string;
+}
 
-export default function BookCard({ name }: { name: string }) {
+export default function BookCard({ name }: BookCardProps) {
   const [book, setBook] = useState<Book | null>(null);
   const [isLoading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -51,7 +54,6 @@ export default function BookCard({ name }: { name: string }) {
     navigate(`/authors/${encodeURIComponent(authorName)}`);
   };
 
-
   const handleBookClick = () => {
     if (!book) return;
     window.open(book.volumeInfo.previewLink, "_blank");
@@ -65,22 +67,24 @@ export default function BookCard({ name }: { name: string }) {
     return <p>Book not found.</p>;
   }
 
+  const { title, subtitle, authors, description, publishedDate, pageCount, imageLinks } = book.volumeInfo;
+
   return (
     <div className="bg-white rounded-lg shadow p-4">
       <div className="flex items-center mb-4">
-        {book.volumeInfo.imageLinks && (
+        {imageLinks && (
           <img
-            src={book.volumeInfo.imageLinks.thumbnail}
-            alt={book.volumeInfo.title}
+            src={imageLinks.thumbnail}
+            alt={title}
             className="w-32 h-auto mr-4"
           />
         )}
         <div>
-          <h1 className="text-2xl font-bold mb-1">{book.volumeInfo.title}</h1>
-          <h2 className="text-xl font-bold mb-2">{book.volumeInfo.subtitle}</h2>
+          <h1 className="text-2xl font-bold mb-1">{title}</h1>
+          {subtitle && <h2 className="text-xl font-bold mb-2">{subtitle}</h2>}
           <p className="text-gray-600">
             Authors:{" "}
-            {book.volumeInfo.authors.map((author, index) => (
+            {authors.map((author, index) => (
               <span key={index}>
                 {index > 0 && ", "}
                 <button
@@ -94,12 +98,12 @@ export default function BookCard({ name }: { name: string }) {
           </p>
         </div>
       </div>
-      <p className="text-gray-600">Description: {book.volumeInfo.description ? book.volumeInfo.description : "N/A"}</p>
-      <p className="text-gray-600">Published Date: {book.volumeInfo.publishedDate}</p>
-      <p className="text-gray-600">Page Count: {book.volumeInfo.pageCount}</p>
+      <p className="text-gray-600">Description: {description || "N/A"}</p>
+      <p className="text-gray-600">Published Date: {publishedDate}</p>
+      <p className="text-gray-600">Page Count: {pageCount}</p>
       <button
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-        onClick={() => handleBookClick()}
+        onClick={handleBookClick}
       >
         Go to Book
       </button>
