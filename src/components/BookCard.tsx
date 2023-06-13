@@ -88,7 +88,7 @@ export default function BookCard({ name }: BookCardProps) {
               <span key={index}>
                 {index > 0 && ", "}
                 <button
-                  className="text-blue-500 hover:text-blue-700"
+                  className="text-blue-500 hover:text-blue-700 cursor-pointer"
                   onClick={() => handleAuthorClick(author)}
                 >
                   {author}

@@ -70,7 +70,7 @@ export default function DynamicTable({ data, onRowClick, selectedRow }: DynamicT
                     <a
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:text-blue-700 text-xs sm:text-sm"
+                      className="text-blue-500 hover:text-blue-700 text-xs sm:text-sm cursor-pointer"
                       onClick={(e) => {
                         handleAuthorClick(e);
                       }}

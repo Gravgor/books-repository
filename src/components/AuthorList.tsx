@@ -58,7 +58,7 @@ export default function AuthorList() {
         <tbody>
           {authors.map((author, index) => (
             <tr className="hover:bg-indigo-100 transition-all" key={index}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base">{author}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm sm:text-base cursor-pointer">{author}</td>
               <td className="px-6 py-4 whitespace-nowrap">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 sm:px-4 rounded text-xs sm:text-sm"
