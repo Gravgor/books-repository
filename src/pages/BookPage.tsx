@@ -4,8 +4,8 @@ import BookCard from "../components/BookCard"
 
 
 export default function BookPage() {
-    const {name} = useParams()
+    const { name } = useParams()
     useBreadcrumbUpdate()
-    if(!name) return null
+    if (!name) return null
     return <BookCard name={name} />
 }
