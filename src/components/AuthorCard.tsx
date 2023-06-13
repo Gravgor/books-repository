@@ -3,7 +3,7 @@ import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setBreadcrumbs } from "../store/actions/breadcrumbAction";
-import { Author, AuthorCardProps, Book } from "../types/authorCardTypes";
+import { Author, AuthorCardProps } from "../types/authorCardTypes";
 
 export default function AuthorCard({ name }: AuthorCardProps) {
   const [author, setAuthor] = useState<Author | null>(null);
