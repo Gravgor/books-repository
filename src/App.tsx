@@ -5,6 +5,7 @@ import Books from './pages/Books'
 import Authors from './pages/Authors'
 import AuthorPage from './pages/AuthorPage'
 import BookPage from './pages/BookPage'
+import NotFound from './components/NotFound'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
            <Route path='/authors' element={<Authors />} />
            <Route path='/books/:id' element={<BookPage />} />
            <Route path='/authors/:name' element={<AuthorPage />} />
+           <Route path='*' element={<NotFound />} />
         </Routes>
       </div>
     </Router>

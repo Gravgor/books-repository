@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Loading from "./Loading";
 import { useNavigate } from "react-router-dom";
 import { Book } from "../types/bookCardTypes";
+import NotFound from "./NotFound";
 
 interface BookCardProps {
   id: string;
@@ -65,7 +66,7 @@ export default function BookCard({ id }: BookCardProps) {
   }
 
   if (!book) {
-    return <p>Book not found.</p>;
+    return <NotFound />;
   }
 
   const { title, subtitle, authors, description, publishedDate, pageCount, imageLinks } = book.volumeInfo;
