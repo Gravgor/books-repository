@@ -26,12 +26,12 @@ Simple application with a dynamic table with row selection and breadcrumb naviga
 
 ## Screenshots
 
-![Screenshot 1](https://imgur.com/Hfhj7MV)
+![Screenshot 1](https://i.imgur.com/Hfhj7MV.png)
 
-![Screenshot 2](https://imgur.com/1svjxRX)
+![Screenshot 2](https://i.imgur.com/1svjxRX.png)
 
-![Screenshot 3](https://imgur.com/mfnJPHl)
+![Screenshot 3](https://i.imgur.com/mfnJPHl.png)
 
-![Screenshot 4](https://imgur.com/uUVN7K8)
+![Screenshot 4](https://i.imgur.com/uUVN7K8.png)
 
-![Screenshot 5](https://imgur.com/vzH3p5X)
+![Screenshot 5](https://i.imgur.com/vzH3p5X.png)
